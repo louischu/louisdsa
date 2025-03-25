@@ -9,6 +9,7 @@ public class ReverseLinkedLIstII {
     public static void main(String[] args) {
         //ListNode listNode = ListNode.fromArray(1, 2, 3, 4, 5, 6, 7);
         ListNode listNode = ListNode.fromArray(3, 5);
+        //ListNode listNode = ListNode.fromArray(1, 2, 3, 4, 5);//2,4
         //listNode.print("OR: ");
         //listNode.print("OR: ");
         ListNode reversedII = reverseBetween(listNode, 1, 2);
@@ -68,7 +69,6 @@ public class ReverseLinkedLIstII {
                 if (count < left) {
                     nodeLeft.next = new ListNode(current.val);
                     nodeLeft = nodeLeft.next;
-
                 }
                 if (count > right) {
                     nodeRight.next = new ListNode(current.val);
@@ -78,13 +78,25 @@ public class ReverseLinkedLIstII {
             }
             count++;
         }
-//        nodeLeftDummy.next.print("LEFT: ");
-//        nodeRightDummy.next.print("RIGHT: ");
-        //prev.print("PREV: ");
-        ListNode join1 = join(nodeLeftDummy.next, prev);
-        //join1.print("JOIN1: ");
-        ListNode ret = join(join1, nodeRightDummy.next);
-        //ret.print("JOIN2");
+        //nodeLeftDummy.next.print("LEFT: ");
+        //nodeRightDummy.next.print("RIGHT: ");
+//        prev.print("PREV: ");
+//        System.out.println("nodeLeftDummy: " + nodeLeftDummy.next);
+//        System.out.println("nodeRightDummy: " + nodeRightDummy.next);
+//        System.out.println("PREV: " + prev);
+        ListNode ret = null;
+        if (nodeLeftDummy.next != null && nodeRightDummy.next != null) {
+            ListNode join1 = join(nodeLeftDummy.next, prev);
+            ret = join(join1, nodeRightDummy.next);
+        } else if (nodeLeftDummy.next == null && nodeRightDummy.next != null) {
+
+            ret = join(prev, nodeRightDummy.next);
+        } else if (nodeLeftDummy.next != null && nodeRightDummy.next == null) {
+            ret = join(nodeLeftDummy.next, prev);
+        } else {
+            ret = prev;
+        }
+
         return ret;
     }
 

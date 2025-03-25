@@ -17,11 +17,13 @@ public class ListNode {
     }
 
     public void print(String message) {
+
         ListNode temp = this;
         while (temp != null) {
             System.out.println(message + temp.val);
             temp = temp.next;
         }
+
     }
 
     public void appendLast(int value) {
